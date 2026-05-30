@@ -2,14 +2,26 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1f1f1f;
 }
 
 @theme inline {
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-black: #1f1f1f;
+  --color-light-pink: #ffb6c1;
+  --color-hot-pink: #ff4081;
+  --color-dark-pink: #cc6f79;
+
+  /* Font family */
+  --font-sans: var(--font-outfit);
+
+  /* Font sizes — fluid, designed at 1512px frame width */
+  --text-title: clamp(32px, 4.41vw, 66.68px);
+  --text-body: clamp(16px, 1.32vw, 20px);
+  --text-small: clamp(13px, 0.99vw, 12px);
+  --text-footnote: clamp(11px, 0.79vw, 10px);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,5 +38,4 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
