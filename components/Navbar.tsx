@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 const navLinks = [
   { label: "Home", id: "home" },
   { label: "Solutions", id: "solutions" },
-  { label: "Pricing", id: "pricing" },
   { label: "About Us", id: "about-us" },
+  { label: "Pricing", id: "pricing" },
 ];
 
 function scrollToSection(id: string) {

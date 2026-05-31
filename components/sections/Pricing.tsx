@@ -1,27 +1,56 @@
+"use client";
+
+import Image from "next/image";
+
+function scrollToSection(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+}
+
 const plans = [
   {
-    name: "Starter",
-    price: "$0",
-    description: "Perfect for individuals getting started.",
-    features: ["Feature one", "Feature two", "Feature three"],
-    cta: "Get Started",
-    highlighted: false,
+    name: "Starter Plan",
+    price: "₱999",
+    period: "/ month",
+    description: "For small backyard farms.\nRecommended: 1-5 farrowing pens.",
+    includesLabel: "Includes",
+    features: [
+      "1 Camera Connection",
+      "AI Piglet Crushing Detection",
+      "Real-Time Mobile Alerts",
+      "Incident History (30 Days)",
+      "Basic Analytics Dashboard",
+      "Email Support",
+    ],
   },
   {
-    name: "Pro",
-    price: "$49",
-    description: "For growing teams that need more.",
-    features: ["Everything in Starter", "Feature four", "Feature five", "Feature six"],
-    cta: "Get Started",
-    highlighted: true,
+    name: "Professional Plan",
+    price: "₱2,499",
+    period: "/ month",
+    description: "For growing commercial farms.\nRecommended: 5-20 farrowing pens.",
+    includesLabel: "Includes everything in Starter, plus",
+    features: [
+      "Up to 5 Cameras",
+      "Advanced Analytics",
+      "Unlimited Alert History",
+      "Incident Video Playback",
+      "Multi-Pen Monitoring",
+      "Priority Support",
+    ],
   },
   {
-    name: "Enterprise",
-    price: "Custom",
-    description: "For large organizations with custom needs.",
-    features: ["Everything in Pro", "Custom integrations", "Dedicated support"],
-    cta: "Contact Us",
-    highlighted: false,
+    name: "Enterprise Plan",
+    price: "Custom Pricing",
+    period: "",
+    description: "For large-scale swine operations.\nRecommended: Commercial farms and cooperatives.",
+    includesLabel: "Includes everything in Professional, plus",
+    features: [
+      "Up to 20 Cameras",
+      "Multi-Farm Monitoring",
+      "Dedicated Account Manager",
+      "API Integration",
+      "Custom Reports",
+      "On-Site Training",
+    ],
   },
 ];
 
@@ -29,58 +58,64 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="scroll-mt-16 py-24 px-6 bg-gray-50"
+      className="scroll-mt-16 py-24 px-6 md:px-28 bg-white"
     >
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-small font-semibold uppercase tracking-widest text-gray-400 mb-4">
-            Pricing
-          </p>
-          <h2 className="text-title font-bold text-black">
-            Simple, Transparent Pricing
-          </h2>
-          <p className="mt-4 text-body text-gray-500 max-w-xl mx-auto">
-            Choose the plan that works best for you. Upgrade or downgrade at any time.
+        {/* Header */}
+        <div className="text-center mb-14">
+          <h2 className="text-title font-bold text-dark-pink">Pricing Plans</h2>
+          <p className="mt-3 text-body text-black max-w-xl mx-auto">
+            Choose the perfect plan to protect your herd and optimize your operations.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`rounded-2xl p-8 flex flex-col ${
-                plan.highlighted
-                  ? "bg-hot-pink text-white"
-                  : "bg-white border border-gray-100"
-              }`}
+              className="group rounded-2xl bg-white border border-light-pink/40 p-7 flex flex-col gap-4 hover:bg-lighter-pink transition-colors duration-200 cursor-default select-none"
             >
-              <p className="text-small font-semibold uppercase tracking-widest mb-2 text-white/70">
-                {plan.name}
-              </p>
-              <p className={`text-title font-bold mb-2 ${plan.highlighted ? "text-white" : "text-black"}`}>
-                {plan.price}
-              </p>
-              <p className={`text-small mb-6 ${plan.highlighted ? "text-white/70" : "text-gray-500"}`}>
-                {plan.description}
-              </p>
-              <ul className="flex flex-col gap-3 mb-8 flex-1">
+              {/* Plan name with star icon */}
+              <div className="flex items-center gap-2">
+                <Image src="/assets/Pricing/price-star.svg" alt="" width={20} height={20} className="shrink-0" />
+                <span className="text-body font-bold text-dark-pink">{plan.name}</span>
+              </div>
+
+              {/* Price */}
+              <div>
+                <span className="text-3xl font-bold text-black group-hover:text-hot-pink transition-colors duration-200">{plan.price}</span>
+                {plan.period && (
+                  <span className="text-small text-black ml-1">{plan.period}</span>
+                )}
+              </div>
+
+              {/* Description */}
+              <div className="flex flex-col">
+                {plan.description.split("\n").map((line, i) => (
+                  <span key={i} className="text-small text-black">{line}</span>
+                ))}
+              </div>
+
+              {/* Includes label */}
+              <p className="text-small font-semibold text-dark-pink/70">{plan.includesLabel}</p>
+
+              {/* Feature list */}
+              <ul className="flex flex-col gap-2 flex-1">
                 {plan.features.map((feature) => (
-                  <li
-                    key={feature}
-                    className={`text-small flex items-center gap-2 ${plan.highlighted ? "text-white/80" : "text-gray-500"}`}
-                  >
-                    <span className={`h-1.5 w-1.5 rounded-full flex-shrink-0 ${plan.highlighted ? "bg-white/60" : "bg-gray-400"}`} />
-                    {feature}
+                  <li key={feature} className="flex items-center gap-2">
+                    <Image src="/assets/Why/check.svg" alt="" width={16} height={16} className="shrink-0" />
+                    <span className="text-small text-black">{feature}</span>
                   </li>
                 ))}
               </ul>
+
+              {/* CTA */}
               <button
-                className={`rounded-full px-6 py-3 text-small font-semibold transition-colors cursor-pointer ${
-                  plan.highlighted
-                    ? "bg-white text-black hover:bg-light-pink/20"
-                    : "bg-black text-white hover:bg-black/80"
-                }`}
+                onClick={() => scrollToSection("book-demo")}
+                className="mt-2 w-full rounded-full bg-hot-pink px-6 py-3 text-small font-semibold text-white hover:bg-dark-pink transition-colors cursor-pointer"
               >
-                {plan.cta}
+                Book a Demo
               </button>
             </div>
           ))}

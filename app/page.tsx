@@ -14,8 +14,8 @@ export default function Page() {
         <Home />
         <Solutions />
         <Why />
-        <Pricing />
         <AboutUs />
+        <Pricing />
         <BookDemo />
       </main>
     </>
