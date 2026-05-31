@@ -94,7 +94,7 @@ export default function Solutions() {
           onClick={() => scrollToSection("why")}
           className="rounded-full bg-hot-pink px-6 py-2.5 text-small font-semibold text-white hover:bg-dark-pink transition-colors cursor-pointer"
         >
-          Why Choose PigletGuard
+          Why Choose PigletGuard?
         </button>
       </div>
     </section>
