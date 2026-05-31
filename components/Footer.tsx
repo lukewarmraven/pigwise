@@ -110,7 +110,7 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <a href="#" aria-label="Facebook">
               <Image
-                src="/assets/footer/black-fb.svg"
+                src="/assets/Footer/black-fb.svg"
                 alt="Facebook"
                 width={15}
                 height={15}
@@ -118,7 +118,7 @@ export default function Footer() {
             </a>
             <a href="#" aria-label="Instagram">
               <Image
-                src="/assets/footer/black-ig.svg"
+                src="/assets/Footer/black-ig.svg"
                 alt="Instagram"
                 width={15}
                 height={15}
@@ -126,7 +126,7 @@ export default function Footer() {
             </a>
             <a href="#" aria-label="TikTok">
               <Image
-                src="/assets/footer/black-tiktok.svg"
+                src="/assets/Footer/black-tiktok.svg"
                 alt="TikTok"
                 width={15}
                 height={15}
