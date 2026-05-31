@@ -11,6 +11,15 @@ const navLinks = [
   { label: "Contact", id: "contact" },
 ];
 
+const allSections = [
+  { id: "home", title: "PigletGuard" },
+  { id: "solutions", title: "Solutions | PigletGuard" },
+  { id: "about-us", title: "About Us | PigletGuard" },
+  { id: "pricing", title: "Pricing | PigletGuard" },
+  { id: "book-demo", title: "Book a Demo | PigletGuard" },
+  { id: "contact", title: "Contact | PigletGuard" },
+];
+
 function scrollToSection(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 }
@@ -21,11 +30,11 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.innerHeight * 0.5;
-      let current = navLinks[0].id;
-      for (const link of navLinks) {
-        const el = document.getElementById(link.id);
+      let current = allSections[0].id;
+      for (const section of allSections) {
+        const el = document.getElementById(section.id);
         if (el && el.getBoundingClientRect().top <= offset) {
-          current = link.id;
+          current = section.id;
         }
       }
       setActiveId(current);
@@ -34,6 +43,11 @@ export default function Navbar() {
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const section = allSections.find((s) => s.id === activeId);
+    if (section) document.title = section.title;
+  }, [activeId]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 h-16 bg-white border-b border-gray-100 flex items-center px-6 md:px-12">

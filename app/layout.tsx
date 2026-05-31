@@ -9,8 +9,8 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Company Name",
-  description: "Your company tagline goes here.",
+  title: "PigletGuard",
+  description: "AI-powered piglet crushing detection for farrowing farms.",
 };
 
 export default function RootLayout({
