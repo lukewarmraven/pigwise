@@ -19,17 +19,15 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY + 80;
-      for (let i = navLinks.length - 1; i >= 0; i--) {
-        const el = document.getElementById(navLinks[i].id);
-        if (el) {
-          const top = el.getBoundingClientRect().top + window.scrollY;
-          if (top <= scrollY) {
-            setActiveId(navLinks[i].id);
-            break;
-          }
+      const offset = window.innerHeight * 0.5;
+      let current = navLinks[0].id;
+      for (const link of navLinks) {
+        const el = document.getElementById(link.id);
+        if (el && el.getBoundingClientRect().top <= offset) {
+          current = link.id;
         }
       }
+      setActiveId(current);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();

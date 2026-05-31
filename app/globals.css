@@ -20,6 +20,7 @@
 
   /* Font sizes — fluid, designed at 1512px frame width */
   --text-title: clamp(32px, 4.41vw, 66.68px);
+  --text-subtitle: clamp(28px, 3.8vw, 56px);
   --text-body: clamp(16px, 1.32vw, 20px);
   --text-small: clamp(13px, 0.99vw, 12px);
   --text-footnote: clamp(11px, 0.79vw, 10px);
