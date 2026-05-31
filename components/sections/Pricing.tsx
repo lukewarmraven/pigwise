@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 
-function scrollToSection(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+function handleBookDemo(planName: string) {
+  window.dispatchEvent(new CustomEvent("select-plan", { detail: planName }));
+  document.getElementById("book-demo")?.scrollIntoView({ behavior: "smooth" });
 }
 
 const plans = [
@@ -134,7 +135,7 @@ export default function Pricing() {
 
               {/* CTA */}
               <button
-                onClick={() => scrollToSection("book-demo")}
+                onClick={() => handleBookDemo(plan.name)}
                 className="mt-2 w-full rounded-full bg-hot-pink px-6 py-3 text-small font-semibold text-white hover:bg-dark-pink transition-colors cursor-pointer"
               >
                 Book a Demo
@@ -170,7 +171,7 @@ export default function Pricing() {
               plan.
             </p>
             <button
-              onClick={() => scrollToSection("book-demo")}
+              onClick={() => handleBookDemo("Hardware Package")}
               className="mt-2 w-full rounded-full bg-hot-pink px-6 py-3 text-small font-semibold text-white hover:bg-dark-pink transition-colors cursor-pointer"
             >
               Book a Demo

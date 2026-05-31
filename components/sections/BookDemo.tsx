@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { supabase } from "@/lib/supabase";
 
 const inputClass =
   "w-full rounded-xl border border-light-pink/50 bg-white px-4 py-3 text-body text-black placeholder-light-pink/70 outline-none focus:border-dark-pink transition-colors";
@@ -14,13 +15,24 @@ export default function BookDemo() {
     farmName: "",
     email: "",
     phone: "",
+    pricingOption: "",
     about: "",
   });
   const [showConfirm, setShowConfirm] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      setForm((prev) => ({ ...prev, pricingOption: (e as CustomEvent).detail }));
+    };
+    window.addEventListener("select-plan", handler);
+    return () => window.removeEventListener("select-plan", handler);
+  }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -30,7 +42,22 @@ export default function BookDemo() {
     setShowConfirm(true);
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
+    setLoading(true);
+    setSubmitError(null);
+    const { error } = await supabase.from("booking").insert({
+      fullName: form.fullName,
+      farmName: form.farmName,
+      email: form.email,
+      phone: form.phone,
+      pricingOption: form.pricingOption,
+      comments: form.about,
+    });
+    setLoading(false);
+    if (error) {
+      setSubmitError("Something went wrong. Please try again.");
+      return;
+    }
     setShowConfirm(false);
     setShowModal(true);
   };
@@ -160,6 +187,23 @@ export default function BookDemo() {
             </div>
 
             <div>
+              <label className={labelClass}>Pricing plan</label>
+              <select
+                name="pricingOption"
+                required
+                value={form.pricingOption}
+                onChange={handleChange}
+                className={`${inputClass} cursor-pointer`}
+              >
+                <option value="" disabled>Select a plan</option>
+                <option value="Starter Plan">Starter Plan — ₱999/mo</option>
+                <option value="Professional Plan">Professional Plan — ₱2,499/mo</option>
+                <option value="Enterprise Plan">Enterprise Plan — Custom Pricing</option>
+                <option value="Hardware Package">Hardware Package — Starting at ₱6,000</option>
+              </select>
+            </div>
+
+            <div>
               <label className={labelClass}>Tell us about your farm</label>
               <textarea
                 name="about"
@@ -203,18 +247,23 @@ export default function BookDemo() {
               review. We will contact you to arrange a demo that fits your
               farm&apos;s requirements.
             </p>
+            {submitError && (
+              <p className="text-small text-red-500 text-center">{submitError}</p>
+            )}
             <div className="flex gap-3 items-center">
               <button
                 onClick={() => setShowConfirm(false)}
-                className="px-6 py-3 text-small font-semibold text-black/60 hover:text-dark-pink transition-colors cursor-pointer"
+                disabled={loading}
+                className="px-6 py-3 text-small font-semibold text-black/60 hover:text-dark-pink transition-colors cursor-pointer disabled:opacity-50"
               >
                 Cancel
               </button>
               <button
                 onClick={handleConfirm}
-                className="rounded-full bg-hot-pink px-6 py-3 text-small font-semibold text-white hover:bg-dark-pink transition-colors cursor-pointer"
+                disabled={loading}
+                className="rounded-full bg-hot-pink px-6 py-3 text-small font-semibold text-white hover:bg-dark-pink transition-colors cursor-pointer disabled:opacity-60"
               >
-                Confirm Demo
+                {loading ? "Submitting…" : "Confirm Demo"}
               </button>
             </div>
           </div>
@@ -247,6 +296,9 @@ export default function BookDemo() {
               </p>
               <p className="text-body font-bold text-hot-pink">
                 {form.fullName} of {form.farmName}!
+              </p>
+              <p className="text-small text-hot-pink italic mt-1">
+                {form.pricingOption}
               </p>
             </div>
 
@@ -303,6 +355,7 @@ export default function BookDemo() {
                   farmName: "",
                   email: "",
                   phone: "",
+                  pricingOption: "",
                   about: "",
                 });
               }}

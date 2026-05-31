@@ -52,12 +52,13 @@ export default function Solutions() {
       {/* Two-column: image left, cards right */}
       <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_2fr] items-center ">
         {/* Left: phone mockup image */}
-        <div className="relative w-120 h-130 overflow-hidden">
+        <div className="flex items-center w-120 h-120 justify-center">
           <Image
             src="/assets/Solutions/Gemini_Generated_Image_g30yhg30yhg30yhg%201.png"
             alt="PigletGuard app mockup"
-            fill
-            className="object-cover object-center"
+            width={450}
+            height={450}
+            className="object-contain"
           />
         </div>
 
