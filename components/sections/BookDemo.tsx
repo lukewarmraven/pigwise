@@ -16,6 +16,7 @@ export default function BookDemo() {
     phone: "",
     about: "",
   });
+  const [showConfirm, setShowConfirm] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const handleChange = (
@@ -26,6 +27,11 @@ export default function BookDemo() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setShowConfirm(true);
+  };
+
+  const handleConfirm = () => {
+    setShowConfirm(false);
     setShowModal(true);
   };
 
@@ -185,12 +191,42 @@ export default function BookDemo() {
         </div>
       </section>
 
+      {/* Confirmation modal */}
+      {showConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+          <div className="bg-white rounded-2xl border-2 border-dark-pink max-w-sm w-full p-8 flex flex-col items-center gap-6 shadow-xl">
+            <h3 className="text-body font-bold text-dark-pink text-center">
+              Submit Demo Request?
+            </h3>
+            <p className="text-small text-black text-center leading-snug">
+              By confirming, your information will be sent to our team for
+              review. We will contact you to arrange a demo that fits your
+              farm&apos;s requirements.
+            </p>
+            <div className="flex gap-3 items-center">
+              <button
+                onClick={() => setShowConfirm(false)}
+                className="px-6 py-3 text-small font-semibold text-black/60 hover:text-dark-pink transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirm}
+                className="rounded-full bg-hot-pink px-6 py-3 text-small font-semibold text-white hover:bg-dark-pink transition-colors cursor-pointer"
+              >
+                Confirm Demo
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-          <div className="bg-white rounded-2xl border-2 border-dark-pink max-w-md w-full p-8 flex flex-col items-center gap-5 shadow-xl">
+          <div className="bg-white rounded-2xl border-2 border-dark-pink max-w-md w-full p-8 flex flex-col items-center gap-2 shadow-xl">
             {/* Logo */}
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-1 mb-2">
               <div className="relative h-10 w-10">
                 <Image
                   src="/assets/Navbar/Gemini_Generated_Image_pnb6jzpnb6jzpnb6%20(1)%201.svg"
@@ -205,11 +241,11 @@ export default function BookDemo() {
             </div>
 
             {/* Thank you message */}
-            <div className="text-center flex flex-col gap-1">
+            <div className="text-center flex flex-col">
               <p className="text-body font-bold text-dark-pink">
                 Thank you for requesting a demo,
               </p>
-              <p className="text-body font-bold text-dark-pink">
+              <p className="text-body font-bold text-hot-pink">
                 {form.fullName} of {form.farmName}!
               </p>
             </div>
@@ -221,8 +257,12 @@ export default function BookDemo() {
               </p>
             </div>
 
+            <p className="text-small text-black/50 italic text-center">
+              This is where our team will contact you:
+            </p>
+
             {/* Contact details */}
-            <div className="flex flex-row px-8 justify-between w-full">
+            <div className="flex flex-row px-8 justify-between w-full mb-2">
               <div className="flex items-center gap-2">
                 <svg
                   className="w-4 h-4 text-dark-pink shrink-0"
@@ -266,7 +306,7 @@ export default function BookDemo() {
                   about: "",
                 });
               }}
-              className="w-full rounded-full bg-dark-pink px-6 py-3 text-small font-semibold text-white hover:bg-dark-pink transition-colors cursor-pointer"
+              className="w-full rounded-full bg-hot-pink px-6 py-3 text-small font-semibold text-white hover:bg-dark-pink transition-colors cursor-pointer"
             >
               OK
             </button>
