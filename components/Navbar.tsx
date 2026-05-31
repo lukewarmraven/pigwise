@@ -8,6 +8,7 @@ const navLinks = [
   { label: "Solutions", id: "solutions" },
   { label: "About Us", id: "about-us" },
   { label: "Pricing", id: "pricing" },
+  { label: "Contact", id: "contact" },
 ];
 
 function scrollToSection(id: string) {

@@ -5,6 +5,8 @@ import Why from "@/components/sections/Why";
 import Pricing from "@/components/sections/Pricing";
 import AboutUs from "@/components/sections/AboutUs";
 import BookDemo from "@/components/sections/BookDemo";
+import ContactUs from "@/components/sections/ContactUs";
+import Footer from "@/components/Footer";
 
 export default function Page() {
   return (
@@ -17,7 +19,9 @@ export default function Page() {
         <AboutUs />
         <Pricing />
         <BookDemo />
+        <ContactUs />
       </main>
+      <Footer />
     </>
   );
 }
