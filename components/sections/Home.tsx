@@ -55,17 +55,29 @@ export default function Home() {
 
         {/* 4. Stats — 3 items horizontally, each with a large value and a label */}
         <div className="flex items-center justify-between w-full">
-          <div className="flex flex-col gap-4">
-            <p className="text-4xl font-semibold text-dark-pink">24/7</p>
-            <p className="text-small text-black">Live Monitoring</p>
+          <div className="flex flex-col gap-4 group cursor-default">
+            <p className="text-4xl text-dark-pink transition-all group-hover:[-webkit-text-stroke:1px_#cc6f79]">
+              24/7
+            </p>
+            <p className="text-small text-black transition-all group-hover:[-webkit-text-stroke:0.4px_#1f1f1f]">
+              Live Monitoring
+            </p>
           </div>
-          <div className="flex flex-col gap-4">
-            <p className="text-4xl font-semibold text-dark-pink">100%</p>
-            <p className="text-small text-black">Real-Time & Secured</p>
+          <div className="flex flex-col gap-4 group cursor-default">
+            <p className="text-4xl text-dark-pink transition-all group-hover:[-webkit-text-stroke:1px_#cc6f79]">
+              100%
+            </p>
+            <p className="text-small text-black transition-all group-hover:[-webkit-text-stroke:0.4px_#1f1f1f]">
+              Real-Time & Secured
+            </p>
           </div>
-          <div className="flex flex-col gap-4">
-            <p className="text-4xl font-semibold text-dark-pink">AI Tech</p>
-            <p className="text-small text-black">Guaranteed Future-Proof</p>
+          <div className="flex flex-col gap-4 group cursor-default">
+            <p className="text-4xl text-dark-pink transition-all group-hover:[-webkit-text-stroke:1px_#cc6f79]">
+              AI Tech
+            </p>
+            <p className="text-small text-black transition-all group-hover:[-webkit-text-stroke:0.4px_#1f1f1f]">
+              Guaranteed Future-Proof
+            </p>
           </div>
         </div>
       </div>
@@ -86,7 +98,6 @@ export default function Home() {
         </div>
         {/* Pill badge — centered on the top-left corner of the image */}
         <div className="absolute top-0 left-0 -translate-x-1 -translate-y-1/2 z-10 group relative w-fit">
-
           {/* Left whiskers — absolutely centered on the pill's midpoint */}
           <div className="absolute right-full top-[40%] -translate-y-1/2 pr-4 flex flex-col items-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="w-4 h-[3px] rounded-full bg-hot-pink rotate-15 origin-right" />
@@ -105,7 +116,6 @@ export default function Home() {
             <div className="w-5 h-[3px] rounded-full bg-hot-pink" />
             <div className="w-4 h-[3px] rounded-full bg-hot-pink rotate-15 origin-left" />
           </div>
-
         </div>
       </div>
     </section>

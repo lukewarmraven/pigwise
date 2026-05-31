@@ -1,5 +1,8 @@
 "use client";
 
+import Image from "next/image";
+import { useEffect, useState } from "react";
+
 const navLinks = [
   { label: "Home", id: "home" },
   { label: "Solutions", id: "solutions" },
@@ -12,34 +15,77 @@ function scrollToSection(id: string) {
 }
 
 export default function Navbar() {
+  const [activeId, setActiveId] = useState("home");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY + 80;
+      for (let i = navLinks.length - 1; i >= 0; i--) {
+        const el = document.getElementById(navLinks[i].id);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY;
+          if (top <= scrollY) {
+            setActiveId(navLinks[i].id);
+            break;
+          }
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 h-16 bg-white/90 backdrop-blur-sm border-b border-gray-100 flex items-center px-6 md:px-12">
+    <nav className="fixed top-0 left-0 right-0 z-50 h-16 bg-white border-b border-gray-100 flex items-center px-6 md:px-12">
+      {/* Left: logo + title */}
       <button
         onClick={() => scrollToSection("home")}
-        className="text-xl font-bold text-gray-900 mr-auto cursor-pointer"
+        className="flex items-center gap-2 cursor-pointer shrink-0"
       >
-        Company Name
+        <div className="relative h-8 w-8">
+          <Image
+            src="/assets/Navbar/Gemini_Generated_Image_pnb6jzpnb6jzpnb6%20(1)%201.svg"
+            alt="PigletGuard logo"
+            fill
+            className="object-contain"
+          />
+        </div>
+        <span className="text-xl font-bold text-dark-pink">PigletGuard</span>
       </button>
-      <ul className="flex items-center gap-8">
+
+      {/* Center: nav links — absolute so they're truly centered */}
+      <ul className="absolute left-1/2 -translate-x-1/2 flex items-center gap-8">
         {navLinks.map((link) => (
           <li key={link.id}>
             <button
               onClick={() => scrollToSection(link.id)}
-              className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
+              className={`relative pb-1 text-small font-medium transition-colors cursor-pointer ${
+                activeId === link.id
+                  ? "text-dark-pink"
+                  : "text-light-pink hover:text-dark-pink"
+              }`}
             >
               {link.label}
+              <span
+                className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-dark-pink rounded-full transition-all duration-300 ${
+                  activeId === link.id ? "w-[140%]" : "w-0"
+                }`}
+              />
             </button>
           </li>
         ))}
-        <li>
-          <button
-            onClick={() => scrollToSection("book-demo")}
-            className="rounded-full bg-gray-900 px-5 py-2 text-sm font-semibold text-white hover:bg-gray-700 transition-colors cursor-pointer"
-          >
-            Book Demo
-          </button>
-        </li>
       </ul>
+
+      {/* Right: Book Demo CTA */}
+      <div className="ml-auto shrink-0">
+        <button
+          onClick={() => scrollToSection("book-demo")}
+          className="rounded-full bg-hot-pink px-4 py-1.5 text-small text-white hover:bg-dark-pink transition-colors cursor-pointer"
+        >
+          Book Demo
+        </button>
+      </div>
     </nav>
   );
 }

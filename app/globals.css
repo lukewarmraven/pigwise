@@ -39,3 +39,26 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+/* Scrollbar — pink, ignores device dark mode */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ff4081 #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff4081;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cc6f79;
+}
